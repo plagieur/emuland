@@ -66,7 +66,7 @@ cargo run --release -p emuland
 Then import your own ROM files (`.gb`, `.gbc`) with the *Importer une ROM* button or by dropping them on the window.
 A tiny demo ROM written for this project is built in (*Essayer la ROM de démonstration*).
 
-**This repository contains no game and no boot ROM.** Only use dumps of cartridges you own.
+**This repository contains no game and no boot ROM.**
 
 ### Controls
 
