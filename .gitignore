@@ -1,0 +1,17 @@
+# build
+/target
+
+# downloaded test ROMs (not redistributed: see scripts/fetch-test-roms.*)
+/test-roms
+
+# local binary copy and user data
+/emuland.exe
+*.sav
+*.state
+*.bmp
+
+# editor / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

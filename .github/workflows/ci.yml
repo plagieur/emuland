@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  core:
+    name: Emulator core (tests and reference ROMs)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Unit and save-state tests
+        run: cargo test --release -p gb-core
+      - name: Download the reference test ROMs
+        run: bash scripts/fetch-test-roms.sh
+      - name: Reference ROMs (Blargg, dmg-acid2, cgb-acid2)
+        run: cargo test --release -p gb-core --test blargg -- --ignored
+
+  app:
+    name: Desktop application (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build --release -p emuland
+      - run: cargo test --release -p emuland

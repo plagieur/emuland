@@ -1,0 +1,29 @@
+name: Release
+
+# Pushing a tag such as v0.1.0 builds the Windows application and attaches it to a GitHub release.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build --release -p emuland
+      - name: Package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Copy-Item target/release/emuland.exe dist/
+          Copy-Item README.md, LICENSE dist/
+          Compress-Archive -Path dist/* -DestinationPath emuland-windows-x64.zip
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: emuland-windows-x64.zip
+          generate_release_notes: true

@@ -1,0 +1,7 @@
+[workspace]
+resolver = "2"
+members = ["gb-core", "emuland"]
+
+[profile.release]
+lto = "thin"
+strip = true

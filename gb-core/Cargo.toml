@@ -1,0 +1,11 @@
+[package]
+name = "gb-core"
+version = "0.1.0"
+edition = "2024"
+description = "A Game Boy and Game Boy Color emulator core, written from scratch (no dependencies)"
+license = "MIT"
+readme = "../README.md"
+keywords = ["gameboy", "emulator", "gbc", "game-boy-color"]
+categories = ["emulators"]
+
+[dependencies]
